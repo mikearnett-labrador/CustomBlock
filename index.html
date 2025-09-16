@@ -18,8 +18,8 @@
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 30px;
-      width: 450px;
-      text-align: center;
+      width: 500px;
+      text-align: left;
     }
     h1 {
       color: #003366;
@@ -27,32 +27,15 @@
     }
     p {
       color: #333;
-      margin-bottom: 20px;
+      margin: 12px 0;
+      line-height: 1.5em;
     }
-    .btn {
-      display: block;
-      width: 100%;
+    .info-box {
+      background: #f0f4ff;
+      border-left: 4px solid #0078d4;
       padding: 12px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-    .btn-request { background: #0078d4; color: white; }
-    .btn-request:hover { background: #005a9e; }
-    .btn-support { background: #e0e0e0; color: #333; }
-    .btn-support:hover { background: #c7c7c7; }
-    .btn-info { background: #f8f8f8; color: #0078d4; border: 1px solid #0078d4; }
-    .btn-info:hover { background: #eef6ff; }
-    #status {
-      margin-top: 20px;
+      margin: 20px 0;
       font-size: 14px;
-      font-weight: 500;
-      color: #444;
-      display: none;
     }
     footer {
       margin-top: 25px;
@@ -64,51 +47,28 @@
 <body>
   <div class="card">
     <h1>Access Restricted</h1>
+ 
+    <p>Hello <strong>{USERNAME}</strong>,</p>
+ 
     <p>
-      You attempted to reach a service that is not currently licensed for your account.<br>
-      Please choose one of the options below:
+      You attempted to access the following site:
+      <br><strong>{URL}</strong>
     </p>
  
-    <button class="btn btn-request" onclick="handleAction('Copilot Access Request submitted')">
-      Request Copilot Access
-    </button>
+    <p>
+      This request was blocked by policy:
+      <br><strong>{POLICY_NAME}</strong>
+    </p>
  
-    <button class="btn btn-support" onclick="handleAction('Support has been notified')">
-      Contact Support
-    </button>
- 
-    <button class="btn btn-info" onclick="handleAction('Redirecting to licensing info...')">
-      View Licensing Info
-    </button>
- 
-    <div id="status"></div>
+    <div class="info-box">
+      If you are trying to use <strong>Microsoft Copilot</strong>, please ensure you have the proper license assigned.<br><br>
+      If you believe you already have Enterprise support or licensing and are still seeing this page, please contact:<br>
+      <a href="mailto:support@yourcompany.com">support@yourcompany.com</a>
+    </div>
  
     <footer>
       Note: All access attempts are logged and monitored.
     </footer>
   </div>
- 
-  <script>
-    function handleAction(message) {
-      const status = document.getElementById("status");
-      status.textContent = message;
-      status.style.display = "block";
- 
-      // Optional: send data to Zscaler logs / Active Form
-      // Example POST to internal handler:
-      /*
-      fetch("https://your-internal-handler.company.com/log", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user: "{USERNAME}",
-          url: "{URL}",
-          policy: "{POLICY_NAME}",
-          action: message
-        })
-      });
-      */
-    }
-  </script>
 </body>
 </html>
